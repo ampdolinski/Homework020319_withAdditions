@@ -1,131 +1,72 @@
 import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
-        ListUtility<Integer> list1 = new ListUtility<Integer>();
-        list1.addNumber(10);
-        list1.addNumber(1);
-        list1.addNumber(3);
-        list1.addNumber(15);
-        list1.addNumber(58);
-        list1.addNumber(60);
-        list1.removeNumber(60);
+        List<Integer> listOfIntegers = new ArrayList<>(Arrays.asList(10, 1, 3, 15, 15, 58, 60, 60, 70));
+        ListUtility<Integer> numberList = new ListUtility<>(listOfIntegers);
 
-        list1.wypisz();
-        System.out.println(list1.getIndexOfMax());
-//        System.out.println(list1.getNumOfElements());
-//        list1.sortUp();
-//        list1.wypisz();
-//        list1.sortDown();
-//        list1.wypisz();
+        numberList.wypisz();
 
-//        Scanner scanner = new Scanner(System.in);
-//
-//        List<Number> listaLista = new ArrayList<Number>();
-//
-//        boolean loop = true;
-//
-//        while (loop) {
-//            try {
-//                System.out.println("Co chcesz zrobić: (dodaj / usuń / pozMin / pozMax / min / max / rosnaco / malejaco / " +
-//                        "mediana / srednia / iloscWszystkich / iloscElementu / " +
-//                        "iloscMniejszych / iloscWiekszych / iloscParzystych / " +
-//                        "iloscNieparzystych / iloscNiepowtarzalnych)");
-//                switch (scanner.nextLine()) {
-//                    case "dodaj":
-//                        Number dodaj = scanner.nextLong();
-//                        listaLista.add(dodaj);
-//                        break;
-//                    case "usun":
-//                        Number usun = scanner.nextLong();
-//                        listaLista.remove(usun);
-//                        break;
-//                    case "pozMin":
-//                       List<Number> kopia = new ArrayList<Number>(listaLista);
-//                        Number min = kopia.get(0);
-//                        int pozycjaMin = 0;
-//                        for (int i = 1; i < kopia.size(); i++) {
-//                            if (min > kopia.get(i)) //tutaj jakiś problem,
-//                            //nie chce ">" dla typu Numers
-//                            {
-//                                min = kopia.get(i);
-//                                pozycjaMin = i;
-//                            }
-//                        }
-//                        System.out.println("minimum znaleziono na pozycji: " + pozycjaMin);
-//
-//                        break;
-//                    case "pozMax":
-//                        List<Number> kopia2 = new ArrayList<Number>(listaLista);
-//                        Number max = kopia2.get(0);
-//                        int pozycjaMax = 0;
-//                        for (int i = 1; i < kopia2.size(); i++) {
-//                            if (max < kopia2.get(i)) {
-//                                max = kopia2.get(i);
-//                                pozycjaMax = i;
-//                            }
-//                        }
-//                        System.out.println("maximum znaleziono na pozycji: " + pozycjaMax);
-//                        break;
-//                    case "min":
-//                        List<Number> kopia3 = new ArrayList<Number>(listaLista);
-//                        Number min2 = kopia3.get(0);
-//                        for (int i = 1; i < kopia3.size(); i++) {
-//                            if (min2 > kopia3.get(i)) //tutaj jakiś problem,
-//                            //nie chce ">" dla typu Numers
-//                            {
-//                                min2 = kopia3.get(i);
-//                            }
-//                        }
-//                        System.out.println("minimum: " + min2 );
-//                        break;
-//                    case "rosnaco":
-//                        List<Number> kopia4 = new ArrayList<Number>(listaLista);
-//                        Number max3 = kopia4.get(0);
-//                                                for (int i = 1; i < kopia4.size(); i++) {
-//                            if (max3 < kopia4.get(i)) {
-//                                max3 = kopia4.get(i);
-//                            }
-//                        }
-//                        System.out.println("lista rosnąco: " + i);
-//                    case "malejaco":
-//                        List<Number> kopia5 = new ArrayList<Number>(listaLista);
-//                        Number min3 = kopia5.get(0);
-//                        for (int i = 1; i < kopia5.size(); i++) {
-//                            if (min3 > kopia5.get(i)) //tutaj jakiś problem,
-//                            //nie chce ">" dla typu Numers
-//                            {
-//                                min3 = kopia5.get(i);
-//                            }
-//                        }
-//                        System.out.println("minimum: " + min3 );
-//                        break;
-//                    case "mediana":
-//                        //
-//                        //
-//                        //
-//                        break;
-//                }
+        // a. dodaj liczbe do listy
+        numberList.addNumber(82);
 
-//        Metody:
-//        a. dodaj liczbe do listy
-//        b. usun liczbe z listy
-//        c. znajdź pozycję minimum
-//        d. znajdź pozycję maximum
-//        e. znajdź minimum,
-//        f. znajdź maximum,
-//        g. posortuj elementy rosnąco,
-//                h. posortuj elementy malejąco,
-//        i. zwróć medianę
+        // b. usun liczbe z listy
+        numberList.removeNumber(60);
 
-//        } catch(NumberFormatException e){
-//                System.out.println("Niepoprawnie wprowadzona wartość spróbuj jeszcze raz!");
-//            }
-//        }
-//        System.out.println("KONIEC");
+        // c. znajdź pozycję minimum
+        System.out.println("Index MIN: " + numberList.getIndexOfMin());
+
+        // d. znajdź pozycję maximum
+        System.out.println("Index MAX: " + numberList.getIndexOfMax());
+
+        // e. znajdź minimum,
+        System.out.println("MIN: " + numberList.getMin());
+
+        // f. znajdź maximum,
+        System.out.println("MAX: " + numberList.getMax());
+
+        // g. posortuj elementy rosnąco,
+        numberList.sortUp();
+        System.out.print("Posortowane rosnąco: ");
+        numberList.wypisz();
+
+        // h. posortuj elementy malejąco,
+        numberList.sortDown();
+        System.out.print("Posortowane malejąco: ");
+        numberList.wypisz();
+
+        // i. zwróć medianę
+        System.out.printf("Mediana: %.2f%n", numberList.getMedian());
+
+        // j. zwróć średnią
+        System.out.printf("Średnia: %.2f%n", numberList.getAverage());
+
+        // k. zwróć ilość obiektów
+        System.out.println("Ilość obeiektów: " + numberList.getNumOfElements());
+
+        // l. policz ilość wystąpień elementu
+        // (podajemy jako argument liczbę T i wtedy mamy policzyć ile razy występuje)
+        System.out.println("Ilość wystąpień '15': " + numberList.countOccuriences(15));
+
+        // m. policz ilość liczb mniejszych od
+        // (podajemy liczbę jako argument, metoda zwaraca ilość mniejszych liczb)
+        System.out.println("Ilość liczb < 10: " + numberList.countNumsLessThan(10));
+
+        // n. policz ilość liczb większych od
+        // (podajemy liczbę jako argument, metoda zwaraca ilość większych liczb)
+        System.out.println("Ilość liczb > 10" + numberList.countNumsGreaterThan(10));
+
+        // o. policz ilość liczb parzystych
+        System.out.println("Ilość parzystych: " + numberList.countOddNums());
+
+        // p. policz ilość liczb nieparzystych
+        System.out.println("Ilość nieparzystych: " + numberList.countEvenNums());
+
+        // r. policz ilość różnych liczb w liście
+        // (np. dla 1, 1, 1, 1, 2, 2, 2, 3, 3, 3, 10 - powinno wyjść 4 [1, 2, 3, 10])
+        System.out.println("Ilość unikatowych liczb:" + numberList.countUniqueNums());
     }
 }

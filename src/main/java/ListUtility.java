@@ -1,10 +1,11 @@
-import java.util.ArrayList;
-import java.util.List;
+import lombok.AllArgsConstructor;
 
-/**
- * @author Jacek Herrmann
- * Date: 2019-03-02
- */
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+@AllArgsConstructor
 public class ListUtility<T extends Number> {
     private List<T> lista = new ArrayList<T>();
 
@@ -15,24 +16,21 @@ public class ListUtility<T extends Number> {
         System.out.println();
     }
 
-    // Adam
-    // a. dodaj liczbe do listy
     public void addNumber(T number) {
         lista.add(number);
     }
 
-    // b. usun liczbe z listy
     public void removeNumber(T number) {
         lista.remove(number);
     }
 
-    // c. znajdź pozycję minimum
     public int getIndexOfMin() {
         int index = 0;
-        double min = Double.parseDouble(String.valueOf(lista.get(0)));
+        double min = lista.get(0).doubleValue();
         double currentNum;
+
         for (int i = 0; i < lista.size(); i++) {
-            currentNum = Double.parseDouble(String.valueOf(lista.get(i)));
+            currentNum = lista.get(i).doubleValue();
             if (currentNum < min) {
                 min = currentNum;
                 index = i;
@@ -42,7 +40,6 @@ public class ListUtility<T extends Number> {
         return index;
     }
 
-    // d. znajdź pozycję maximum
     public int getIndexOfMax() {
         int index = 0;
         double max = Double.parseDouble(String.valueOf(lista.get(0)));
@@ -57,77 +54,108 @@ public class ListUtility<T extends Number> {
         return index;
     }
 
-    // e. znajdź minimum,
     public T getMin() {
         List<T> tempList = new ArrayList<>(lista);
         tempList.sort(new TComparator(true));
         return tempList.get(0);
     }
 
-    // f. znajdź maximum,
     public T getMax() {
         List<T> tempList = new ArrayList<>(lista);
         tempList.sort(new TComparator(false));
         return tempList.get(0);
     }
 
-    // g. posortuj elementy rosnąco,
     public List<T> sortUp() {
         lista.sort(new TComparator(true));
         return lista;
     }
 
-    // h. posortuj elementy malejąco,
     public List<T> sortDown() {
         lista.sort(new TComparator(false));
         return lista;
     }
 
-    // i. zwróć medianę
-    public T getMedian() {
+    public double getMedian() {
         List<T> tempList = new ArrayList<>(lista);
         tempList.sort(new TComparator(false));
+        double mediana;
 
-        if (tempList.size() % 2 == 0) {
-            return tempList.get(tempList.size() / 2);
+        if (tempList.size() % 2 != 0) {
+            mediana = tempList.get(tempList.size() / 2).doubleValue();
+            return mediana;
         } else {
-            return tempList.get(tempList.size());
+            mediana = ((tempList.get(tempList.size() / 2).doubleValue()) +
+                    (tempList.get((tempList.size() / 2) - 1).doubleValue())) / 2;
+            return mediana;
         }
     }
 
-    // JACEK
-    // j. zwróć średnią
     public double getAverage() {
-//        T suma = 0;
-        return 0.0;
+        double sum = 0;
+        for (T t : lista) {
+            sum += t.doubleValue();
+        }
+        return (sum / lista.size());
     }
 
-    // k. zwróć ilość obiektów
     public int getNumOfElements() {
         return lista.size();
     }
 
-    // l. policz ilość wystąpień elementu (podajemy jako argument liczbę T i wtedy mamy policzyć ile razy występuje)
+    public int countOccuriences(T number) {
+        int count = 0;
+        for (T t : lista) {
+            if (t.doubleValue() == number.doubleValue()) {
+                count++;
+            }
+        }
 
-    // m. policz ilość liczb mniejszych od (podajemy liczbę jako argument, metoda zwaraca ilość mniejszych liczb)
-
-    // n. policz ilość liczb większych od (podajemy liczbę jako argument, metoda zwaraca ilość większych liczb)
-
-    // o. policz ilość liczb parzystych
-
-    // p. policz ilość liczb nieparzystych
-
-    // r. policz ilość różnych liczb w liście (np. dla 1, 1, 1, 1, 2, 2, 2, 3, 3, 3, 10 - powinno wyjść 4 [1, 2, 3, 10])
-
-    public List<T> getLista() {
-        return lista;
+        return count;
     }
 
-    public void setLista(List<T> lista) {
-        this.lista = lista;
+    public int countNumsLessThan(T number) {
+        int count = 0;
+        for (T t : lista) {
+            if (t.doubleValue() < number.doubleValue()) {
+                count++;
+            }
+        }
+        return count;
     }
 
-    public ListUtility(List<T> lista) {
-        this.lista = lista;
+    public int countNumsGreaterThan(T number) {
+        int count = 0;
+        for (T t : lista) {
+            if (t.doubleValue() > number.doubleValue()) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public int countOddNums() {
+        int count = 0;
+        for (T t : lista) {
+            if (t.doubleValue() % 2 == 0) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public int countEvenNums() {
+        int count = 0;
+        for (T t : lista) {
+            if (t.doubleValue() % 2 != 0) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public int countUniqueNums() {
+        Set<T> uniqueList = new HashSet<>(lista);
+        return uniqueList.size();
     }
 }
