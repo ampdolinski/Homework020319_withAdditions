@@ -118,4 +118,16 @@ public class ListUtility<T extends Number> {
     // p. policz ilość liczb nieparzystych
 
     // r. policz ilość różnych liczb w liście (np. dla 1, 1, 1, 1, 2, 2, 2, 3, 3, 3, 10 - powinno wyjść 4 [1, 2, 3, 10])
+
+    public List<T> getLista() {
+        return lista;
+    }
+
+    public void setLista(List<T> lista) {
+        this.lista = lista;
+    }
+
+    public ListUtility(List<T> lista) {
+        this.lista = lista;
+    }
 }
